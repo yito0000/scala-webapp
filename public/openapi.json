@@ -1,0 +1,567 @@
+{
+  "openapi" : "3.0.1",
+  "info" : {
+    "description" : "サンプルのAPI定義になります",
+    "title" : "Book Management",
+    "version" : "1.0.0"
+  },
+  "servers" : [ {
+    "url" : "https://dev.api/v1"
+  }, {
+    "url" : "http://localhost:8080/v1"
+  } ],
+  "tags" : [ {
+    "description" : "書籍情報CRUD",
+    "name" : "書籍"
+  }, {
+    "description" : "このシステムを利用するユーザー情報CRUD",
+    "name" : "ユーザー"
+  }, {
+    "name" : "その他"
+  } ],
+  "paths" : {
+    "/books" : {
+      "get" : {
+        "description" : "参照可能な書籍リストを取得します",
+        "responses" : {
+          "200" : {
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "items" : {
+                    "$ref" : "#/components/schemas/Book"
+                  },
+                  "type" : "array"
+                }
+              }
+            },
+            "description" : "OK"
+          },
+          "400" : {
+            "content" : { },
+            "description" : "無効なAPI KEYです"
+          }
+        },
+        "security" : [ {
+          "api_key" : [ ]
+        } ],
+        "summary" : "書籍一覧取得API",
+        "tags" : [ "書籍" ]
+      },
+      "post" : {
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/Book"
+              }
+            }
+          },
+          "description" : "新しい書籍を登録する",
+          "required" : true
+        },
+        "responses" : {
+          "200" : {
+            "description" : "OK"
+          },
+          "405" : {
+            "content" : { },
+            "description" : "リクエストパラメータに誤りがあります"
+          }
+        },
+        "summary" : "書籍登録API",
+        "tags" : [ "書籍" ]
+      },
+      "put" : {
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/Book"
+              }
+            }
+          },
+          "description" : "書籍情報を更新します",
+          "required" : true
+        },
+        "responses" : {
+          "200" : {
+            "description" : "OK"
+          },
+          "400" : {
+            "content" : { },
+            "description" : "無効なIDです"
+          },
+          "404" : {
+            "content" : { },
+            "description" : "更新対象の書籍が見つかりません"
+          },
+          "405" : {
+            "content" : { },
+            "description" : "リクエストパラメータに誤りがあります"
+          }
+        },
+        "summary" : "書籍更新API",
+        "tags" : [ "書籍" ]
+      }
+    },
+    "/books/findByTags" : {
+      "get" : {
+        "deprecated" : true,
+        "description" : "指定した複数タグのいずれかを含む書籍リストを取得します",
+        "parameters" : [ {
+          "explode" : true,
+          "in" : "query",
+          "name" : "tags",
+          "required" : true,
+          "schema" : {
+            "items" : {
+              "type" : "string"
+            },
+            "type" : "array"
+          },
+          "style" : "form"
+        } ],
+        "responses" : {
+          "200" : {
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "items" : {
+                    "$ref" : "#/components/schemas/Book"
+                  },
+                  "type" : "array"
+                }
+              }
+            },
+            "description" : "OK"
+          },
+          "400" : {
+            "content" : { },
+            "description" : "無効なタグがあります"
+          }
+        },
+        "summary" : "タグ絞り込み検索API",
+        "tags" : [ "書籍" ]
+      }
+    },
+    "/books/{bookId}" : {
+      "delete" : {
+        "parameters" : [ {
+          "explode" : false,
+          "in" : "header",
+          "name" : "api_key",
+          "required" : false,
+          "schema" : {
+            "type" : "string"
+          },
+          "style" : "simple"
+        }, {
+          "description" : "書籍ID",
+          "explode" : false,
+          "in" : "path",
+          "name" : "bookId",
+          "required" : true,
+          "schema" : {
+            "format" : "int64",
+            "type" : "integer"
+          },
+          "style" : "simple"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "OK"
+          },
+          "400" : {
+            "content" : { },
+            "description" : "無効なAPI KEYです"
+          },
+          "404" : {
+            "content" : { },
+            "description" : "書籍が見つかりませんでした"
+          }
+        },
+        "summary" : "書籍削除API",
+        "tags" : [ "書籍" ]
+      },
+      "get" : {
+        "description" : "IDに紐づく書籍を取得します",
+        "parameters" : [ {
+          "description" : "書籍ID",
+          "explode" : false,
+          "in" : "path",
+          "name" : "bookId",
+          "required" : true,
+          "schema" : {
+            "format" : "int64",
+            "type" : "integer"
+          },
+          "style" : "simple"
+        } ],
+        "responses" : {
+          "200" : {
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Book"
+                }
+              }
+            },
+            "description" : "OK"
+          },
+          "400" : {
+            "content" : { },
+            "description" : "無効なIDです"
+          },
+          "404" : {
+            "content" : { },
+            "description" : "書籍が見つかりませんでした"
+          }
+        },
+        "security" : [ {
+          "api_key" : [ ]
+        } ],
+        "summary" : "書籍詳細取得API",
+        "tags" : [ "書籍" ]
+      }
+    },
+    "/users" : {
+      "get" : {
+        "description" : "ログイン可能なユーザーリストを取得します",
+        "responses" : {
+          "200" : {
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/User"
+                }
+              }
+            },
+            "description" : "OK"
+          },
+          "400" : {
+            "content" : { },
+            "description" : "無効なユーザー名です"
+          },
+          "404" : {
+            "content" : { },
+            "description" : "ユーザーが見つかりませんでした"
+          }
+        },
+        "summary" : "ユーザー一覧取得API",
+        "tags" : [ "ユーザー" ]
+      },
+      "post" : {
+        "description" : "書籍管理するユーザーを登録します",
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/User"
+              }
+            }
+          },
+          "description" : "ユーザー情報",
+          "required" : true
+        },
+        "responses" : {
+          "default" : {
+            "content" : { },
+            "description" : "OK"
+          }
+        },
+        "summary" : "ユーザー登録API",
+        "tags" : [ "ユーザー" ]
+      }
+    },
+    "/users/login" : {
+      "get" : {
+        "parameters" : [ {
+          "description" : "ユーザー名",
+          "explode" : true,
+          "in" : "query",
+          "name" : "username",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          },
+          "style" : "form"
+        }, {
+          "description" : "パスワード",
+          "explode" : true,
+          "in" : "query",
+          "name" : "password",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          },
+          "style" : "form"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "OK"
+          },
+          "400" : {
+            "content" : { },
+            "description" : "ユーザー名/パスワードに誤りがあります"
+          }
+        },
+        "summary" : "ログインAPI",
+        "tags" : [ "ユーザー" ]
+      }
+    },
+    "/users/logout" : {
+      "get" : {
+        "responses" : {
+          "default" : {
+            "content" : { },
+            "description" : "OK"
+          }
+        },
+        "summary" : "ログアウトAPI",
+        "tags" : [ "ユーザー" ]
+      }
+    },
+    "/users/{username}" : {
+      "delete" : {
+        "description" : "指定したユーザーを削除します",
+        "parameters" : [ {
+          "description" : "ユーザー名",
+          "explode" : false,
+          "in" : "path",
+          "name" : "username",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          },
+          "style" : "simple"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "OK"
+          },
+          "400" : {
+            "content" : { },
+            "description" : "無効なユーザー名です"
+          },
+          "404" : {
+            "content" : { },
+            "description" : "ユーザーが見つかりませんでした"
+          }
+        },
+        "summary" : "ユーザー削除API",
+        "tags" : [ "ユーザー" ]
+      },
+      "get" : {
+        "parameters" : [ {
+          "description" : "ユーザー名",
+          "explode" : false,
+          "in" : "path",
+          "name" : "username",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          },
+          "style" : "simple"
+        } ],
+        "responses" : {
+          "200" : {
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/User"
+                }
+              }
+            },
+            "description" : "OK"
+          },
+          "400" : {
+            "content" : { },
+            "description" : "無効なユーザー名です"
+          },
+          "404" : {
+            "content" : { },
+            "description" : "ユーザーが見つかりませんでした"
+          }
+        },
+        "summary" : "ユーザー詳細取得APi",
+        "tags" : [ "ユーザー" ]
+      },
+      "put" : {
+        "description" : "ユーザー情報を更新します",
+        "parameters" : [ {
+          "description" : "ユーザー名",
+          "explode" : false,
+          "in" : "path",
+          "name" : "username",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          },
+          "style" : "simple"
+        } ],
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/User"
+              }
+            }
+          },
+          "required" : true
+        },
+        "responses" : {
+          "200" : {
+            "description" : "OK"
+          },
+          "400" : {
+            "content" : { },
+            "description" : "リクエストパラメータに誤りがあります"
+          },
+          "404" : {
+            "content" : { },
+            "description" : "ユーザーが見つかりませんでした"
+          }
+        },
+        "summary" : "ユーザー更新API",
+        "tags" : [ "ユーザー" ]
+      }
+    },
+    "/tags" : {
+      "get" : {
+        "description" : "タグリストを取得します",
+        "responses" : {
+          "200" : {
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "items" : {
+                    "$ref" : "#/components/schemas/Tag"
+                  },
+                  "type" : "array"
+                }
+              }
+            },
+            "description" : "OK"
+          },
+          "400" : {
+            "content" : { },
+            "description" : "無効なAPI KEYです"
+          }
+        },
+        "security" : [ {
+          "api_key" : [ ]
+        } ],
+        "summary" : "タグ一覧取得API",
+        "tags" : [ "その他" ]
+      }
+    }
+  },
+  "components" : {
+    "schemas" : {
+      "User" : {
+        "example" : {
+          "firstName" : "firstName",
+          "lastName" : "lastName",
+          "password" : "password",
+          "id" : 0,
+          "email" : "email",
+          "username" : "username"
+        },
+        "properties" : {
+          "id" : {
+            "description" : "ユーザーID",
+            "format" : "int64",
+            "type" : "integer"
+          },
+          "username" : {
+            "description" : "ユーザー名",
+            "type" : "string"
+          },
+          "firstName" : {
+            "description" : "名",
+            "type" : "string"
+          },
+          "lastName" : {
+            "description" : "姓",
+            "type" : "string"
+          },
+          "email" : {
+            "description" : "メールアドレス",
+            "type" : "string"
+          },
+          "password" : {
+            "description" : "パスワード",
+            "type" : "string"
+          }
+        },
+        "required" : [ "email", "firstName", "lastName", "password", "username" ],
+        "type" : "object"
+      },
+      "Tag" : {
+        "example" : {
+          "name" : "name",
+          "id" : 6
+        },
+        "properties" : {
+          "id" : {
+            "description" : "タグID",
+            "format" : "int64",
+            "type" : "integer"
+          },
+          "name" : {
+            "description" : "タグ名",
+            "type" : "string"
+          }
+        },
+        "type" : "object"
+      },
+      "Book" : {
+        "example" : {
+          "author" : "John",
+          "id" : 0,
+          "title" : "OpenAPI Convert Postman Collection",
+          "tags" : [ {
+            "name" : "name",
+            "id" : 6
+          }, {
+            "name" : "name",
+            "id" : 6
+          } ]
+        },
+        "properties" : {
+          "id" : {
+            "description" : "書籍ID",
+            "format" : "int64",
+            "type" : "integer"
+          },
+          "title" : {
+            "description" : "タイトル",
+            "example" : "OpenAPI Convert Postman Collection",
+            "type" : "string"
+          },
+          "author" : {
+            "description" : "著者",
+            "example" : "John",
+            "type" : "string"
+          },
+          "tags" : {
+            "items" : {
+              "$ref" : "#/components/schemas/Tag"
+            },
+            "type" : "array"
+          }
+        },
+        "required" : [ "author", "title" ],
+        "type" : "object"
+      }
+    },
+    "securitySchemes" : {
+      "api_key" : {
+        "in" : "header",
+        "name" : "api_key",
+        "type" : "apiKey"
+      }
+    }
+  }
+}

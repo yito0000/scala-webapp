@@ -1,0 +1,28 @@
+# Routes
+# This file defines all application routes (Higher priority routes first)
+# ~~~~
+
+
+# Routes for  API
+
+GET /v1/books/findByTags      api.DefaultApiController.booksFindByTagsGet()
+GET /v1/books                 api.DefaultApiController.booksGet()
+POST /v1/books                api.DefaultApiController.booksPost()
+PUT /v1/books                 api.DefaultApiController.booksPut()
+GET /v1/tags                  api.DefaultApiController.tagsGet()
+GET /v1/users                 api.DefaultApiController.usersGet()
+GET /v1/users/login           api.DefaultApiController.usersLoginGet()
+GET /v1/users/logout          api.DefaultApiController.usersLogoutGet()
+POST /v1/users                api.DefaultApiController.usersPost()
+DELETE /v1/books/:bookId      api.DefaultApiController.booksBookIdDelete(bookId: Long)
+GET /v1/books/:bookId         api.DefaultApiController.booksBookIdGet(bookId: Long)
+DELETE /v1/users/:username    api.DefaultApiController.usersUsernameDelete(username: String)
+GET /v1/users/:username       api.DefaultApiController.usersUsernameGet(username: String)
+PUT /v1/users/:username       api.DefaultApiController.usersUsernamePut(username: String)
+
+# Map static resources from the /public folder to the /assets URL path
+GET /assets/*file           controllers.Assets.at(file)
+GET /versionedAssets/*file  controllers.Assets.versioned(file)
+
+# Swagger UI
+GET /api                    api.ApiDocController.api

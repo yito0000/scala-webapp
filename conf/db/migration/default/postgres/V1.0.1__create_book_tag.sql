@@ -1,0 +1,8 @@
+DROP TABLE IF EXISTS tag CASCADE;
+
+CREATE TABLE tag
+(
+    book_id VARCHAR(36)  NOT NULL,
+    name    VARCHAR(200) NOT NULL,
+    CONSTRAINT tag_book_fk FOREIGN KEY(book_id) REFERENCES book
+);
