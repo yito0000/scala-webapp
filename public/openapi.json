@@ -1,7 +1,7 @@
 {
   "openapi" : "3.0.1",
   "info" : {
-    "description" : "サンプルのAPI定義になります。 \\\n以下のツールを使って、OpenAPI からコードを自動生成します。 \\\nhttps://github.com/OpenAPITools/openapi-generator \\\n\\\n実行コマンドは以下です。\n```\nopenapi-generator generate -g scala-play-server -i docs/api-spec.yaml\n```\n",
+    "description" : "サンプルのAPI定義になります。 \\\n以下のツールを使って、OpenAPI からコードを自動生成します。 \\\nhttps://github.com/OpenAPITools/openapi-generator \\\n\\\nコード生成の実行コマンドは以下です。\n```\nopenapi-generator generate -g scala-play-server -i docs/api-spec.yaml\n```\n\nアプリの実行コマンドは以下です。\n```\nsbt 'run -Dconfig.file=conf/application.dev.conf'\n```\n",
     "title" : "Book Management",
     "version" : "1.0.0"
   },
@@ -508,6 +508,7 @@
             "type" : "string"
           }
         },
+        "required" : [ "name" ],
         "type" : "object"
       },
       "Book" : {
@@ -543,7 +544,7 @@
             "type" : "array"
           }
         },
-        "required" : [ "author", "title" ],
+        "required" : [ "author", "id", "tags", "title" ],
         "type" : "object"
       }
     },

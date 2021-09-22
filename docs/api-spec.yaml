@@ -6,9 +6,14 @@ info:
     以下のツールを使って、OpenAPI からコードを自動生成します。 \
     https://github.com/OpenAPITools/openapi-generator \
     \
-    実行コマンドは以下です。
+    コード生成の実行コマンドは以下です。
     ```
     openapi-generator generate -g scala-play-server -i docs/api-spec.yaml
+    ```
+
+    アプリの実行コマンドは以下です。
+    ```
+    sbt 'run -Dconfig.file=conf/application.dev.conf'
     ```
   version: 1.0.0
 servers:

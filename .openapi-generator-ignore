@@ -21,3 +21,10 @@
 #docs/*.md
 # Then explicitly reverse the ignore rule for a single file:
 #!docs/README.md
+
+app/api/DefaultApiImpl.scala
+conf/application.conf
+conf/logback.xml
+project/build.properties
+project/plugins.sbt
+build.sbt
