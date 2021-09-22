@@ -1,12 +1,10 @@
 package domain.book
 
-import domain.tag.Tag
-
 class BookEntity(
     val id: BookId,
     val title: BookTitle,
     val author: BookAuthor,
-    val tags: List[Tag]
+    val tags: List[BookTag]
 ) {
 
   def canEqual(other: Any): Boolean = other.isInstanceOf[BookEntity]

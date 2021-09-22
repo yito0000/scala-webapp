@@ -5,8 +5,8 @@ import com.typesafe.config.ConfigFactory
 import org.scalatestplus.play.PlaySpec
 import org.scalatestplus.play.guice.GuiceOneAppPerSuite
 import play.api.db.{Database, Databases}
-import play.api.{Application, Configuration, inject}
 import play.api.inject.guice.GuiceApplicationBuilder
+import play.api.{Application, Configuration, inject}
 
 import java.io.File
 

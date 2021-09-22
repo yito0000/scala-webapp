@@ -1,12 +1,12 @@
-package domain.tag
+package domain.book
 
-class Tag(val value: String) {
+class BookTag(val value: String) {
   require(value != "")
 
-  def canEqual(other: Any): Boolean = other.isInstanceOf[Tag]
+  def canEqual(other: Any): Boolean = other.isInstanceOf[BookTag]
 
   override def equals(other: Any): Boolean = other match {
-    case that: Tag =>
+    case that: BookTag =>
       (that canEqual this) &&
         value == that.value
     case _ => false
@@ -16,4 +16,6 @@ class Tag(val value: String) {
     val state = Seq(value)
     state.map(_.hashCode()).foldLeft(0)((a, b) => 31 * a + b)
   }
+
+  override def toString = s"BookTag($value)"
 }

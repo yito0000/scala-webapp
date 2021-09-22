@@ -1,15 +1,14 @@
 package api
 
-import play.api.libs.json._
-import model.Book
-import model.Tag
-import model.User
+import com.google.inject.ImplementedBy
+import model.{Book, Tag, User}
 
 @javax.annotation.Generated(
   value =
     Array("org.openapitools.codegen.languages.ScalaPlayFrameworkServerCodegen"),
-  date = "2021-09-18T23:42:37.917390+09:00[Asia/Tokyo]"
+  date = "2021-09-22T20:13:22.087650+09:00[Asia/Tokyo]"
 )
+@ImplementedBy(classOf[DefaultApiImpl])
 trait DefaultApi {
 
   /** 書籍削除API

@@ -1,18 +1,18 @@
 package api
 
-import domain.book.BookId
 import model.Book
 import model.Tag
 import model.User
+import service.BookService
 
-import javax.inject.Singleton
+import javax.inject.Inject
 
 /** Provides a default implementation for [[DefaultApi]].
   */
 @javax.annotation.Generated(
   value =
     Array("org.openapitools.codegen.languages.ScalaPlayFrameworkServerCodegen"),
-  date = "2021-09-18T23:42:37.917390+09:00[Asia/Tokyo]"
+  date = "2021-09-22T20:13:22.087650+09:00[Asia/Tokyo]"
 )
 class DefaultApiImpl extends DefaultApi {
 
@@ -28,7 +28,7 @@ class DefaultApiImpl extends DefaultApi {
   override def booksBookIdGet(bookId: Long): Book = {
     // TODO: Implement better logic
 
-    Book(None, "", "", None)
+    Book("", "", "", List())
   }
 
   /** @inheritdoc
@@ -42,8 +42,15 @@ class DefaultApiImpl extends DefaultApi {
   /** @inheritdoc
     */
   override def booksGet(): List[Book] = {
-
-    List.empty[Book]
+//    bookService.fetchAll() map (entity =>
+//      new Book(
+//        entity.id.value,
+//        entity.title.value,
+//        entity.author.value,
+//        entity.tags map (tag => new Tag(tag.value))
+//      )
+//    )
+    List()
   }
 
   /** @inheritdoc

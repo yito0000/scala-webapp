@@ -1,7 +1,15 @@
 openapi: 3.0.1
 info:
   title: Book Management
-  description: 'サンプルのAPI定義になります'
+  description: |
+    サンプルのAPI定義になります。 \
+    以下のツールを使って、OpenAPI からコードを自動生成します。 \
+    https://github.com/OpenAPITools/openapi-generator \
+    \
+    実行コマンドは以下です。
+    ```
+    openapi-generator generate -g scala-play-server -i docs/api-spec.yaml
+    ```
   version: 1.0.0
 servers:
   - url: https://dev.api/v1
@@ -358,24 +366,23 @@ components:
         - email
         - password
     Tag:
+      required:
+        - name
       type: object
       properties:
-        id:
-          type: integer
-          format: int64
-          description: タグID
         name:
           type: string
           description: タグ名
     Book:
       required:
+        - id
         - title
         - author
+        - tags
       type: object
       properties:
         id:
-          type: integer
-          format: int64
+          type: string
           description: 書籍ID
         title:
           type: string

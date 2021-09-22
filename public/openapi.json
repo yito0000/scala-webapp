@@ -1,7 +1,7 @@
 {
   "openapi" : "3.0.1",
   "info" : {
-    "description" : "サンプルのAPI定義になります",
+    "description" : "サンプルのAPI定義になります。 \\\n以下のツールを使って、OpenAPI からコードを自動生成します。 \\\nhttps://github.com/OpenAPITools/openapi-generator \\\n\\\n実行コマンドは以下です。\n```\nopenapi-generator generate -g scala-play-server -i docs/api-spec.yaml\n```\n",
     "title" : "Book Management",
     "version" : "1.0.0"
   },
@@ -500,15 +500,9 @@
       },
       "Tag" : {
         "example" : {
-          "name" : "name",
-          "id" : 6
+          "name" : "name"
         },
         "properties" : {
-          "id" : {
-            "description" : "タグID",
-            "format" : "int64",
-            "type" : "integer"
-          },
           "name" : {
             "description" : "タグ名",
             "type" : "string"
@@ -519,21 +513,18 @@
       "Book" : {
         "example" : {
           "author" : "John",
-          "id" : 0,
+          "id" : "id",
           "title" : "OpenAPI Convert Postman Collection",
           "tags" : [ {
-            "name" : "name",
-            "id" : 6
+            "name" : "name"
           }, {
-            "name" : "name",
-            "id" : 6
+            "name" : "name"
           } ]
         },
         "properties" : {
           "id" : {
             "description" : "書籍ID",
-            "format" : "int64",
-            "type" : "integer"
+            "type" : "string"
           },
           "title" : {
             "description" : "タイトル",
