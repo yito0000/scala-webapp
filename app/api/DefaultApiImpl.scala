@@ -5,7 +5,7 @@ import model.Tag
 import model.User
 import service.BookService
 
-import javax.inject.Inject
+import javax.inject.{Inject, Singleton}
 
 /** Provides a default implementation for [[DefaultApi]].
   */
@@ -14,7 +14,9 @@ import javax.inject.Inject
     Array("org.openapitools.codegen.languages.ScalaPlayFrameworkServerCodegen"),
   date = "2021-09-22T20:13:22.087650+09:00[Asia/Tokyo]"
 )
-class DefaultApiImpl extends DefaultApi {
+@Singleton
+class DefaultApiImpl @Inject() (private val bookService: BookService)
+    extends DefaultApi {
 
   /** @inheritdoc
     */
@@ -42,15 +44,14 @@ class DefaultApiImpl extends DefaultApi {
   /** @inheritdoc
     */
   override def booksGet(): List[Book] = {
-//    bookService.fetchAll() map (entity =>
-//      new Book(
-//        entity.id.value,
-//        entity.title.value,
-//        entity.author.value,
-//        entity.tags map (tag => new Tag(tag.value))
-//      )
-//    )
-    List()
+    bookService.fetchAll() map (entity =>
+      new Book(
+        entity.id.value,
+        entity.title.value,
+        entity.author.value,
+        entity.tags map (tag => new Tag(tag.value))
+      )
+    )
   }
 
   /** @inheritdoc

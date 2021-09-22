@@ -1,6 +1,5 @@
 package support
 
-import api.{DefaultApi, DefaultApiImpl}
 import com.typesafe.config.ConfigFactory
 import org.scalatestplus.play.PlaySpec
 import org.scalatestplus.play.guice.GuiceOneAppPerSuite
@@ -21,7 +20,7 @@ trait DatabaseTestSpec extends PlaySpec with GuiceOneAppPerSuite {
 
     GuiceApplicationBuilder()
       .configure(Configuration(config))
-      .bindings(inject.bind[DefaultApi].to[DefaultApiImpl])
+      .bindings(inject.bind[Database].toInstance(database))
       .build()
   }
 

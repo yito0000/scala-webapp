@@ -8,7 +8,6 @@ import model.{Book, Tag, User}
     Array("org.openapitools.codegen.languages.ScalaPlayFrameworkServerCodegen"),
   date = "2021-09-22T20:13:22.087650+09:00[Asia/Tokyo]"
 )
-@ImplementedBy(classOf[DefaultApiImpl])
 trait DefaultApi {
 
   /** 書籍削除API
