@@ -1,0 +1,16 @@
+@import controllers.form.InputForm
+@(inputForm:Form[InputForm])(implicit request: RequestHeader, messagesProvider: MessagesProvider)
+
+@import helper._
+
+@main("Input Page") {
+
+  <section>
+    @helper.form(action = CSRF(routes.HomeController.postInput)) {
+      @inputText(inputForm("input1"), '_label -> "Input-1")
+      @inputText(inputForm("input2"), '_label -> "Input-2")
+      @inputText(inputForm("input3"), '_label -> "Input-3")
+      <input type="submit" />
+    }
+  </section>
+}

@@ -26,3 +26,8 @@ GET /versionedAssets/*file  controllers.Assets.versioned(file)
 
 # Swagger UI
 GET /api                    api.ApiDocController.api
+
+GET / controllers.HomeController.index()
+GET /input controllers.HomeController.getInput()
+POST /input controllers.HomeController.postInput()
+GET /complete controllers.HomeController.getComplete()
